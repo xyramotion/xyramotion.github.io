@@ -1,89 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>XYRA</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XYRA MOTION</title>
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #F3EBDD; /* logo cream */
+            color: #1E3A8A; /* logo blue */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
 
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      height: 100vh;
-      background: linear-gradient(135deg, #0a0a0a, #1c1c1c);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      font-family: 'Montserrat', sans-serif;
-      color: white;
-      overflow: hidden;
-    }
+        .container {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            padding: 30px;
+        }
 
-    h1 {
-      font-size: 4rem;
-      letter-spacing: 6px;
-      opacity: 0;
-      transform: translateY(-20px);
-      animation: fadeInUp 1s forwards;
-    }
+        .side-logo img {
+            width: 120px;
+            height: auto;
+        }
 
-    p {
-      font-size: 1.5rem;
-      margin-top: 1rem;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeInUp 1s forwards 1s;
-    }
+        .content {
+            max-width: 420px;
+        }
 
-    .buttons {
-      margin-top: 3rem;
-      display: flex;
-      gap: 20px;
-      opacity: 0;
-      animation: fadeInUp 1s forwards 2s;
-    }
+        h1 {
+            margin: 0;
+            font-size: 36px;
+            letter-spacing: 2px;
+        }
 
-    .buttons a {
-      padding: 12px 25px;
-      background: #00ffe0;
-      color: #000;
-      font-weight: bold;
-      text-decoration: none;
-      border-radius: 8px;
-      transition: 0.3s;
-    }
+        p {
+            margin: 12px 0 28px;
+            color: #3B4F8C;
+        }
 
-    .buttons a:hover {
-      background: #00bfa5;
-      color: #fff;
-    }
+        .buttons a {
+            display: block;
+            text-decoration: none;
+            margin-bottom: 14px;
+            padding: 13px;
+            text-align: center;
+            border-radius: 8px;
+            background-color: #1E3A8A;
+            color: #F3EBDD;
+            font-weight: 500;
+            transition: 0.3s ease;
+        }
 
-    @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+        .buttons a:hover {
+            background-color: #162C66;
+        }
 
-    @media(max-width: 600px){
-      h1 { font-size: 3rem; }
-      p { font-size: 1.2rem; }
-      .buttons { flex-direction: column; gap: 15px; }
-    }
-  </style>
+        .info {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #3B4F8C;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .side-logo img {
+                width: 90px;
+            }
+        }
+    </style>
 </head>
-
 <body>
-  <h1>XYRA</h1>
-  <p>Turning ideas into illusions</p>
 
-  <div class="buttons">
-    <a href="https://www.instagram.com/xyra.motion?igsh=eGc4aHhxOW01NW11&utm_source=qr" target="_blank">Instagram</a>
-    <a href="tel:+97430475382">Call Me</a>
-  </div>
+    <div class="container">
+        <!-- SIDE LOGO -->
+        <div class="side-logo">
+            <img src="logo.jpg" alt="XYRA Motion Logo">
+        </div>
+
+        <!-- CONTENT -->
+        <div class="content">
+            <h1>XYRA MOTION</h1>
+            <p>We turn your ideas into illusion</p>
+
+            <div class="buttons">
+                <a href="https://www.instagram.com/xyra.motion?igsh=eGc4aHhxOW01NW11&utm_source=qr" target="_blank">
+                    Instagram
+                </a>
+
+                <a href="tel:+97430475382">
+                    Call: +974 3047 5382
+                </a>
+
+                <a href="mailto:xyramotions@gmail.com">
+                    Email: xyramotions@gmail.com
+                </a>
+            </div>
+
+            <div class="info">
+                © 2025 XYRA Motion
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
