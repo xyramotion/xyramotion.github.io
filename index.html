@@ -6,51 +6,19 @@
   <title>Xyra Motion</title>
   <style>
     /* --- Reset & General Styles --- */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
     body, html {
+      margin: 0;
+      padding: 0;
       font-family: 'Arial', sans-serif;
-      color: #fff;
+      height: 100%;
+      color: #ffffff;
       overflow-x: hidden;
-      scroll-behavior: smooth;
-      background: #000;
-    }
-
-    /* --- Fullscreen sections for parallax --- */
-    section {
-      height: 100vh;
-      width: 100%;
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      overflow: hidden;
-    }
-
-    /* --- Heading & Slogan Styles --- */
-    h1 {
-      font-size: 4rem;
-      letter-spacing: 2px;
-      opacity: 0;
-      animation: fadeInLetters 3s forwards;
-    }
-    .slogan {
-      font-size: 1.5rem;
-      font-style: italic;
-      letter-spacing: 1px;
-      margin-top: 15px;
-      opacity: 0;
-      animation: fadeInLetters 4s forwards;
-    }
-
-    @keyframes fadeInLetters {
-      0% { opacity: 0; transform: translateY(20px); }
-      100% { opacity: 1; transform: translateY(0); }
+      background: #000; /* fallback background */
     }
 
     /* --- Background Video --- */
-    .bg-video {
-      position: absolute;
+    #bg-video {
+      position: fixed;
       top: 0;
       left: 0;
       width: 100%;
@@ -59,16 +27,19 @@
       z-index: -3;
     }
 
+    /* --- Dark overlay for cinematic effect --- */
     body::before {
       content: '';
       position: fixed;
-      top:0; left:0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.5);
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
       z-index: -2;
     }
 
-    /* --- Particle Canvas --- */
+    /* --- Particle Container --- */
     #particles {
       position: fixed;
       top: 0;
@@ -79,7 +50,49 @@
       pointer-events: none;
     }
 
-    /* --- Light Streaks --- */
+    /* --- Main Content --- */
+    .container {
+      text-align: center;
+      padding: 20vh 20px 0 20px;
+    }
+
+    h1 {
+      font-size: 4rem;
+      margin: 0;
+      animation: fadeIn 2s forwards;
+    }
+
+    .slogan {
+      font-size: 1.5rem;
+      font-style: italic;
+      letter-spacing: 1px;
+      margin-top: 15px;
+      animation: fadeIn 3s forwards;
+    }
+
+    /* --- Fade-in Animation --- */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+
+    /* --- Social Icons --- */
+    .social-icons {
+      margin-top: 50px;
+    }
+    .social-icons a {
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 1.5rem;
+      margin: 0 10px;
+      transition: transform 0.3s, color 0.3s;
+    }
+    .social-icons a:hover {
+      transform: scale(1.2);
+      color: #ffcc00; /* Highlight color */
+    }
+
+    /* --- Light Streaks Animation --- */
     .light-streak {
       position: fixed;
       width: 200px;
@@ -88,48 +101,19 @@
       animation: streakMove 5s linear infinite;
       z-index: -1;
     }
+
     @keyframes streakMove {
       0% { transform: translateX(-300px) translateY(0); opacity: 0; }
       10% { opacity: 1; }
       50% { transform: translateX(100vw) translateY(200px); opacity: 0.3; }
       100% { transform: translateX(200vw) translateY(0); opacity: 0; }
     }
-
-    /* --- Social Icons --- */
-    .social-icons {
-      margin-top: 50px;
-    }
-    .social-icons a {
-      color: #fff;
-      text-decoration: none;
-      font-size: 1.5rem;
-      margin: 0 10px;
-      transition: transform 0.3s, color 0.3s;
-    }
-    .social-icons a:hover {
-      transform: scale(1.2);
-      color: #ffcc00;
-    }
-
-    /* --- Parallax Backgrounds --- */
-    .parallax {
-      position: absolute;
-      top: 0;
-      left:0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      z-index: -3;
-      transform: translateZ(0);
-      will-change: transform;
-    }
-
   </style>
 </head>
 <body>
 
   <!-- Background Video -->
-  <video autoplay muted loop class="bg-video">
+  <video autoplay muted loop id="bg-video">
     <source src="cinematic-bg.mp4" type="video/mp4">
   </video>
 
@@ -141,29 +125,17 @@
   <div class="light-streak" style="top: 50%; animation-delay: 2s;"></div>
   <div class="light-streak" style="top: 80%; animation-delay: 4s;"></div>
 
-  <!-- Section 1: Hero -->
-  <section>
-    <div class="container">
-      <h1>Xyra Motion</h1>
-      <p class="slogan">We turn your ideas into illusion</p>
-      <div class="social-icons">
-        <a href="https://www.instagram.com/xyra.motion?igsh=eGc4aHhxOW01NW11&utm_source=qr" target="_blank">Instagram</a>
-        <a href="tel:30475382">Contact</a>
-      </div>
+  <!-- Main Content -->
+  <div class="container">
+    <h1>Xyra Motion</h1>
+    <p class="slogan">We turn your ideas into illusion</p>
+
+    <!-- Social Icons -->
+    <div class="social-icons">
+      <a href="https://www.instagram.com/xyra.motion?igsh=eGc4aHhxOW01NW11&utm_source=qr" target="_blank">Instagram</a>
+      <a href="tel:30475382">Contact</a>
     </div>
-  </section>
-
-  <!-- Section 2: About / Additional cinematic -->
-  <section style="background: url('cinematic-bg2.jpg') center/cover no-repeat;">
-    <h1>Our Vision</h1>
-    <p class="slogan">Creating cinematic illusions that inspire</p>
-  </section>
-
-  <!-- Section 3: Portfolio / More content -->
-  <section style="background: url('cinematic-bg3.jpg') center/cover no-repeat;">
-    <h1>Our Work</h1>
-    <p class="slogan">Turning imagination into reality</p>
-  </section>
+  </div>
 
   <!-- Particle JS -->
   <script>
@@ -207,7 +179,7 @@
 
     function init() {
       particlesArray = [];
-      for (let i = 0; i < 120; i++) {
+      for (let i = 0; i < 100; i++) {
         particlesArray.push(new Particle());
       }
     }
@@ -223,14 +195,6 @@
 
     init();
     animate();
-
-    // Parallax effect on scroll
-    window.addEventListener('scroll', function() {
-      const scrollY = window.scrollY;
-      document.querySelectorAll('.parallax').forEach((el, index) => {
-        el.style.transform = `translateY(${scrollY * (0.2 + index*0.05)}px)`;
-      });
-    });
   </script>
 </body>
 </html>
