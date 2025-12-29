@@ -1,196 +1,236 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>XYRA MOTION</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Xyra Motion</title>
+  <style>
+    /* --- Reset & General Styles --- */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body, html {
+      font-family: 'Arial', sans-serif;
+      color: #fff;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+      background: #000;
+    }
 
-    <style>
-        /* GENERAL STYLES */
-        body {
-            margin: 0;
-            font-family: Arial, Helvetica, sans-serif;
-            background-color: #F3EBDD; /* logo cream */
-            color: #1E3A8A; /* logo blue */
-            position: relative;
-            overflow-x: hidden;
-        }
+    /* --- Fullscreen sections for parallax --- */
+    section {
+      height: 100vh;
+      width: 100%;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      overflow: hidden;
+    }
 
-        .container {
-            display: flex;
-            align-items: center;
-            gap: 40px;
-            padding: 30px;
-            flex-wrap: wrap;
-            position: relative;
-            z-index: 2; /* Keep above floating icons */
-        }
+    /* --- Heading & Slogan Styles --- */
+    h1 {
+      font-size: 4rem;
+      letter-spacing: 2px;
+      opacity: 0;
+      animation: fadeInLetters 3s forwards;
+    }
+    .slogan {
+      font-size: 1.5rem;
+      font-style: italic;
+      letter-spacing: 1px;
+      margin-top: 15px;
+      opacity: 0;
+      animation: fadeInLetters 4s forwards;
+    }
 
-        .side-logo img {
-            width: 120px;
-            height: auto;
-        }
+    @keyframes fadeInLetters {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
 
-        .content {
-            max-width: 500px;
-        }
+    /* --- Background Video --- */
+    .bg-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -3;
+    }
 
-        h1 {
-            margin: 0;
-            font-size: 36px;
-            letter-spacing: 2px;
-            color: #1E3A8A;
-        }
+    body::before {
+      content: '';
+      position: fixed;
+      top:0; left:0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: -2;
+    }
 
-        p {
-            margin: 12px 0 28px;
-            color: #1E3A8A;
-        }
+    /* --- Particle Canvas --- */
+    #particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+    }
 
-        .buttons a {
-            display: block;
-            text-decoration: none;
-            margin-bottom: 14px;
-            padding: 13px;
-            text-align: center;
-            border-radius: 8px;
-            background-color: #1E3A8A;
-            color: #F3EBDD;
-            font-weight: 500;
-            transition: 0.3s ease;
-        }
+    /* --- Light Streaks --- */
+    .light-streak {
+      position: fixed;
+      width: 200px;
+      height: 2px;
+      background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,0.5), rgba(255,255,255,0));
+      animation: streakMove 5s linear infinite;
+      z-index: -1;
+    }
+    @keyframes streakMove {
+      0% { transform: translateX(-300px) translateY(0); opacity: 0; }
+      10% { opacity: 1; }
+      50% { transform: translateX(100vw) translateY(200px); opacity: 0.3; }
+      100% { transform: translateX(200vw) translateY(0); opacity: 0; }
+    }
 
-        .buttons a:hover {
-            background-color: #162C66;
-        }
+    /* --- Social Icons --- */
+    .social-icons {
+      margin-top: 50px;
+    }
+    .social-icons a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.5rem;
+      margin: 0 10px;
+      transition: transform 0.3s, color 0.3s;
+    }
+    .social-icons a:hover {
+      transform: scale(1.2);
+      color: #ffcc00;
+    }
 
-        .info {
-            margin-top: 20px;
-            font-size: 14px;
-            color: #1E3A8A;
-        }
+    /* --- Parallax Backgrounds --- */
+    .parallax {
+      position: absolute;
+      top: 0;
+      left:0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -3;
+      transform: translateZ(0);
+      will-change: transform;
+    }
 
-        /* INTRODUCTION TEXT */
-        .introduction {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            margin-bottom: 28px;
-        }
-
-        /* FLOATING SOCIAL ICONS */
-        .floating-icons {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            overflow: hidden;
-            z-index: 1;
-        }
-
-        .floating-icons .icon {
-            position: absolute;
-            width: 30px;
-            height: 30px;
-            opacity: 0.08; /* faded cream/black */
-            animation: float 20s linear infinite;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(100vh) rotate(0deg); }
-            50% { opacity: 0.4; }
-            100% { transform: translateY(-10vh) rotate(360deg); }
-        }
-
-        /* RANDOM POSITIONING FOR EACH ICON */
-        .icon1 { left: 5%; animation-duration: 25s; }
-        .icon2 { left: 20%; animation-duration: 30s; }
-        .icon3 { left: 50%; animation-duration: 28s; }
-        .icon4 { left: 70%; animation-duration: 32s; }
-        .icon5 { left: 85%; animation-duration: 27s; }
-
-        @media (max-width: 768px) {
-            .container {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .side-logo img {
-                width: 90px;
-            }
-        }
-    </style>
+  </style>
 </head>
 <body>
 
-    <!-- FLOATING SOCIAL ICONS -->
-    <div class="floating-icons">
-        <!-- Instagram -->
-        <svg class="icon icon1" viewBox="0 0 448 512" fill="rgba(0,0,0,0.08)">
-            <path d="M224,202.66A53.34,53.34,0,1,0,277.34,256,53.38,53.38,0,0,0,224,202.66Zm124.71-41a54,54,0,0,0-30.63-30.63C286.28,124.14,224,124.14,224,124.14s-62.28,0-94.08,6.88a54,54,0,0,0-30.63,30.63C93.14,158.72,93.14,224,93.14,224s0,65.28,6.88,94.08a54,54,0,0,0,30.63,30.63c31.8,6.88,94.08,6.88,94.08,6.88s62.28,0,94.08-6.88a54,54,0,0,0,30.63-30.63c6.88-28.8,6.88-94.08,6.88-94.08S355.59,158.72,348.71,161.66ZM224,338a82,82,0,1,1,82-82A82.09,82.09,0,0,1,224,338Zm85.4-148.6a19.2,19.2,0,1,1,19.2-19.2A19.21,19.21,0,0,1,309.4,189.4Z"/>
-        </svg>
+  <!-- Background Video -->
+  <video autoplay muted loop class="bg-video">
+    <source src="cinematic-bg.mp4" type="video/mp4">
+  </video>
 
-        <!-- TikTok -->
-        <svg class="icon icon2" viewBox="0 0 448 512" fill="rgba(0,0,0,0.08)">
-            <path d="M448,209.91a209.79,209.79,0,0,1-74.91-14.28v115.2a118.49,118.49,0,1,1-118.49-118.49V208.57A209.77,209.77,0,1,0,448,209.91Z"/>
-        </svg>
+  <!-- Particle Canvas -->
+  <canvas id="particles"></canvas>
 
-        <!-- Facebook -->
-        <svg class="icon icon3" viewBox="0 0 320 512" fill="rgba(0,0,0,0.08)">
-            <path d="M279.14 288l14.22-92.66h-88.91V127.88c0-25.35 12.42-50.06 52.24-50.06H293V6.26S269.7 0 248.6 0c-73.22 0-121.09 44.38-121.09 124.72v70.62H56v92.66h71.51V512h91.63V288z"/>
-        </svg>
+  <!-- Light Streaks -->
+  <div class="light-streak" style="top: 20%; animation-delay: 0s;"></div>
+  <div class="light-streak" style="top: 50%; animation-delay: 2s;"></div>
+  <div class="light-streak" style="top: 80%; animation-delay: 4s;"></div>
 
-        <!-- YouTube -->
-        <svg class="icon icon4" viewBox="0 0 576 512" fill="rgba(0,0,0,0.08)">
-            <path d="M549.655 124.083c-6.281-23.65-24.802-42.171-48.452-48.452C456.644 64 288 64 288 64s-168.644 0-213.203 11.631c-23.65 6.281-42.171 24.802-48.452 48.452C16 168.644 16 256 16 256s0 87.356 10.345 131.917c6.281 23.65 24.802 42.171 48.452 48.452C119.356 448 288 448 288 448s168.644 0 213.203-11.631c23.65-6.281 42.171-24.802 48.452-48.452C560 343.356 560 256 560 256s0-87.356-10.345-131.917zM232 334V178l142 78-142 78z"/>
-        </svg>
-
-        <!-- Extra icon -->
-        <svg class="icon icon5" viewBox="0 0 448 512" fill="rgba(0,0,0,0.08)">
-            <path d="M224,202.66A53.34,53.34,0,1,0,277.34,256,53.38,53.38,0,0,0,224,202.66Z"/>
-        </svg>
-    </div>
-
-    <!-- MAIN CONTENT -->
+  <!-- Section 1: Hero -->
+  <section>
     <div class="container">
-        <!-- SIDE LOGO -->
-        <div class="side-logo">
-            <img src="logo.jpg" alt="XYRA Motion Logo">
-        </div>
-
-        <!-- CONTENT -->
-        <div class="content">
-            <h1>XYRA MOTION</h1>
-
-            <!-- INTRODUCTION -->
-            <p class="introduction">
-                Hi, I’m <strong>Badsha</strong>, the creative mind behind <strong>XYRA MOTION</strong>. 
-                We turn ideas into stunning visual experiences. I specialize in motion graphics and digital storytelling, 
-                helping brands and creators bring their visions to life. With a passion for creativity and precision, 
-                I aim to make every project a unique experience.
-            </p>
-
-            <!-- CONTACT BUTTONS -->
-            <div class="buttons">
-                <a href="https://www.instagram.com/xyra.motion?igsh=eGc4aHhxOW01NW11&utm_source=qr" target="_blank">
-                    Instagram
-                </a>
-
-                <a href="tel:+97430475382">
-                    Call: +974 3047 5382
-                </a>
-
-                <a href="mailto:xyramotions@gmail.com">
-                    Email: xyramotions@gmail.com
-                </a>
-            </div>
-
-            <div class="info">
-                © 2025 XYRA Motion
-            </div>
-        </div>
+      <h1>Xyra Motion</h1>
+      <p class="slogan">We turn your ideas into illusion</p>
+      <div class="social-icons">
+        <a href="https://www.instagram.com/xyra.motion?igsh=eGc4aHhxOW01NW11&utm_source=qr" target="_blank">Instagram</a>
+        <a href="tel:30475382">Contact</a>
+      </div>
     </div>
+  </section>
 
+  <!-- Section 2: About / Additional cinematic -->
+  <section style="background: url('cinematic-bg2.jpg') center/cover no-repeat;">
+    <h1>Our Vision</h1>
+    <p class="slogan">Creating cinematic illusions that inspire</p>
+  </section>
+
+  <!-- Section 3: Portfolio / More content -->
+  <section style="background: url('cinematic-bg3.jpg') center/cover no-repeat;">
+    <h1>Our Work</h1>
+    <p class="slogan">Turning imagination into reality</p>
+  </section>
+
+  <!-- Particle JS -->
+  <script>
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+    let particlesArray = [];
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    window.addEventListener('resize', function() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      init();
+    });
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 3 + 1;
+        this.speedX = Math.random() * 1 - 0.5;
+        this.speedY = Math.random() * 1 - 0.5;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+
+        if (this.x > canvas.width) this.x = 0;
+        if (this.x < 0) this.x = canvas.width;
+        if (this.y > canvas.height) this.y = 0;
+        if (this.y < 0) this.y = canvas.height;
+      }
+      draw() {
+        ctx.fillStyle = 'rgba(255,255,255,0.7)';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
+        ctx.fill();
+      }
+    }
+
+    function init() {
+      particlesArray = [];
+      for (let i = 0; i < 120; i++) {
+        particlesArray.push(new Particle());
+      }
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particlesArray.forEach(p => {
+        p.update();
+        p.draw();
+      });
+      requestAnimationFrame(animate);
+    }
+
+    init();
+    animate();
+
+    // Parallax effect on scroll
+    window.addEventListener('scroll', function() {
+      const scrollY = window.scrollY;
+      document.querySelectorAll('.parallax').forEach((el, index) => {
+        el.style.transform = `translateY(${scrollY * (0.2 + index*0.05)}px)`;
+      });
+    });
+  </script>
 </body>
 </html>
