@@ -85,30 +85,30 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 1;
             overflow: hidden;
+            z-index: 1;
         }
 
-        .floating-icons i {
+        .floating-icons .icon {
             position: absolute;
-            font-size: 24px;
-            color: rgba(0,0,0,0.08); /* light faded black */
+            width: 30px;
+            height: 30px;
+            opacity: 0.08; /* faded cream/black */
             animation: float 20s linear infinite;
         }
 
         @keyframes float {
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 0.2; }
-            50% { opacity: 0.6; }
-            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0.2; }
+            0% { transform: translateY(100vh) rotate(0deg); }
+            50% { opacity: 0.4; }
+            100% { transform: translateY(-10vh) rotate(360deg); }
         }
 
-        /* RANDOM POSITIONING */
+        /* RANDOM POSITIONING FOR EACH ICON */
         .icon1 { left: 5%; animation-duration: 25s; }
         .icon2 { left: 20%; animation-duration: 30s; }
-        .icon3 { left: 35%; animation-duration: 28s; }
-        .icon4 { left: 50%; animation-duration: 32s; }
-        .icon5 { left: 65%; animation-duration: 27s; }
-        .icon6 { left: 80%; animation-duration: 35s; }
+        .icon3 { left: 50%; animation-duration: 28s; }
+        .icon4 { left: 70%; animation-duration: 32s; }
+        .icon5 { left: 85%; animation-duration: 27s; }
 
         @media (max-width: 768px) {
             .container {
@@ -121,22 +121,38 @@
             }
         }
     </style>
-
-    <!-- FONT AWESOME FOR SOCIAL ICONS -->
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
     <!-- FLOATING SOCIAL ICONS -->
     <div class="floating-icons">
-        <i class="fab fa-instagram icon1"></i>
-        <i class="fab fa-tiktok icon2"></i>
-        <i class="fab fa-facebook-f icon3"></i>
-        <i class="fab fa-youtube icon4"></i>
-        <i class="fab fa-instagram icon5"></i>
-        <i class="fab fa-tiktok icon6"></i>
+        <!-- Instagram -->
+        <svg class="icon icon1" viewBox="0 0 448 512" fill="rgba(0,0,0,0.08)">
+            <path d="M224,202.66A53.34,53.34,0,1,0,277.34,256,53.38,53.38,0,0,0,224,202.66Zm124.71-41a54,54,0,0,0-30.63-30.63C286.28,124.14,224,124.14,224,124.14s-62.28,0-94.08,6.88a54,54,0,0,0-30.63,30.63C93.14,158.72,93.14,224,93.14,224s0,65.28,6.88,94.08a54,54,0,0,0,30.63,30.63c31.8,6.88,94.08,6.88,94.08,6.88s62.28,0,94.08-6.88a54,54,0,0,0,30.63-30.63c6.88-28.8,6.88-94.08,6.88-94.08S355.59,158.72,348.71,161.66ZM224,338a82,82,0,1,1,82-82A82.09,82.09,0,0,1,224,338Zm85.4-148.6a19.2,19.2,0,1,1,19.2-19.2A19.21,19.21,0,0,1,309.4,189.4Z"/>
+        </svg>
+
+        <!-- TikTok -->
+        <svg class="icon icon2" viewBox="0 0 448 512" fill="rgba(0,0,0,0.08)">
+            <path d="M448,209.91a209.79,209.79,0,0,1-74.91-14.28v115.2a118.49,118.49,0,1,1-118.49-118.49V208.57A209.77,209.77,0,1,0,448,209.91Z"/>
+        </svg>
+
+        <!-- Facebook -->
+        <svg class="icon icon3" viewBox="0 0 320 512" fill="rgba(0,0,0,0.08)">
+            <path d="M279.14 288l14.22-92.66h-88.91V127.88c0-25.35 12.42-50.06 52.24-50.06H293V6.26S269.7 0 248.6 0c-73.22 0-121.09 44.38-121.09 124.72v70.62H56v92.66h71.51V512h91.63V288z"/>
+        </svg>
+
+        <!-- YouTube -->
+        <svg class="icon icon4" viewBox="0 0 576 512" fill="rgba(0,0,0,0.08)">
+            <path d="M549.655 124.083c-6.281-23.65-24.802-42.171-48.452-48.452C456.644 64 288 64 288 64s-168.644 0-213.203 11.631c-23.65 6.281-42.171 24.802-48.452 48.452C16 168.644 16 256 16 256s0 87.356 10.345 131.917c6.281 23.65 24.802 42.171 48.452 48.452C119.356 448 288 448 288 448s168.644 0 213.203-11.631c23.65-6.281 42.171-24.802 48.452-48.452C560 343.356 560 256 560 256s0-87.356-10.345-131.917zM232 334V178l142 78-142 78z"/>
+        </svg>
+
+        <!-- Extra icon -->
+        <svg class="icon icon5" viewBox="0 0 448 512" fill="rgba(0,0,0,0.08)">
+            <path d="M224,202.66A53.34,53.34,0,1,0,277.34,256,53.38,53.38,0,0,0,224,202.66Z"/>
+        </svg>
     </div>
 
+    <!-- MAIN CONTENT -->
     <div class="container">
         <!-- SIDE LOGO -->
         <div class="side-logo">
